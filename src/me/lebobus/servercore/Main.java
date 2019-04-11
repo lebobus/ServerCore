@@ -16,8 +16,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.lebobus.servercore.ban.Ban;
-import me.lebobus.servercore.kick.Kick;
+import me.lebobus.servercore.moderation.ban.Ban;
+import me.lebobus.servercore.moderation.kick.Kick;
+import me.lebobus.servercore.moderation.mute.Mute;
 
 
 public class Main extends JavaPlugin implements Listener {
@@ -32,10 +33,12 @@ public class Main extends JavaPlugin implements Listener {
   public void onEnable() {
 	  
     registerEvents(this, new Listener[] { this });
-    registerEvents(this, new Listener[] { new Ban() });
+    registerEvents(this, new Listener[] { new Ban(), new Mute() });
     getCommand("ban").setExecutor(new Ban());
     getCommand("unban").setExecutor(new Ban());
     getCommand("kick").setExecutor(new Kick());
+    getCommand("mute").setExecutor(new Mute());
+    getCommand("unmute").setExecutor(new Mute());
         
     /*
     config = new Files(getDataFolder(), "config.yml");

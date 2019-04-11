@@ -7,3 +7,5 @@ commands:
     ban:
     unban:
     kick:
+    mute:
+    unmute:

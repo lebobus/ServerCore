@@ -1,4 +1,4 @@
-package me.lebobus.servercore.ban;
+package me.lebobus.servercore.moderation.ban;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -76,7 +76,7 @@ public class Ban implements CommandExecutor, Listener {
 				return true;
 			}
 			
-			if (args.length == 0 || args.length > 1 || args.length < 1) {
+			if (args.length == 0 || args.length > 1) {
             	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&7Usage: &b/pardon &7[&bplayer&7]"));
                     return true;
             }

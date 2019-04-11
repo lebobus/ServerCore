@@ -1,8 +1,7 @@
-package me.lebobus.servercore.kick;
+package me.lebobus.servercore.moderation.kick;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,22 +19,22 @@ public class Kick implements CommandExecutor {
 				return true;
 			}
 			
-            if (args.length == 0 || args.length > 1 || args.length < 1) {
+            if (args.length == 0 || args.length > 1) {
             	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&7Usage: &b/kick &7[&bplayer&7]"));
                     return true;
             }
             
             
-            OfflinePlayer target = Bukkit.getServer().getPlayer(args[0]);
+            Player target = Bukkit.getServer().getPlayer(args[0]);
             if (args.length == 1) {
             	
             	if (target == null) {
-            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&b"+args[0]+"&7 is not online&7."));
+            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&b"+args[0]+"&7 is not &bonline&7."));
             		return true;
             	}
             	
             	if (target.isOnline()) {
-            		((Player) target).kickPlayer(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&7You have been &bkicked&7."));
+            		((Player) target).kickPlayer(ChatColor.translateAlternateColorCodes('&', "&7You have been &bkicked&7."));
             		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&b"+sender.getName()+" &7has kicked&b "+target.getName()+"&7."));
             		return true;
             	}
