@@ -1,0 +1,6 @@
+main: me.lebobus.servercore.Main
+name: ServerCore
+version: '1.0'
+description: Vous dormez au gaz
+author: Bobus
+commands: []
