@@ -16,6 +16,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.lebobus.servercore.ban.Ban;
+import me.lebobus.servercore.kick.Kick;
+
 
 public class Main extends JavaPlugin implements Listener {
 	
@@ -29,8 +32,10 @@ public class Main extends JavaPlugin implements Listener {
   public void onEnable() {
 	  
     registerEvents(this, new Listener[] { this });
-    //registerEvents(this, new Listener[] { new FfaListener(), new KtsListener(), new Menu(), new MenuInv(), new Signs(), new KitsListener(), new Scoreboard(), new Killstreak(), new KitsShopGUI(), new Vampire(), new Fireman()  });
-    //getCommand("ffa").setExecutor(new Ffa());
+    registerEvents(this, new Listener[] { new Ban() });
+    getCommand("ban").setExecutor(new Ban());
+    getCommand("unban").setExecutor(new Ban());
+    getCommand("kick").setExecutor(new Kick());
         
     /*
     config = new Files(getDataFolder(), "config.yml");
