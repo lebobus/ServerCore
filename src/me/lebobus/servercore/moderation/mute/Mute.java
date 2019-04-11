@@ -1,8 +1,6 @@
 package me.lebobus.servercore.moderation.mute;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -34,9 +32,7 @@ public class Mute implements CommandExecutor, Listener {
 	
 	
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-    	
-    	Player p = (Player)sender;
-		
+
 		if (cmd.getName().equalsIgnoreCase("mute")) {
 			if (!sender.hasPermission("core.mute")) {
 				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&7You do not have access to that command."));
