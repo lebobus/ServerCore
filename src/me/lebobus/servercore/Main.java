@@ -19,38 +19,32 @@ import org.bukkit.plugin.java.JavaPlugin;
 import me.lebobus.servercore.moderation.ban.Ban;
 import me.lebobus.servercore.moderation.kick.Kick;
 import me.lebobus.servercore.moderation.mute.Mute;
+import me.lebobus.servercore.utils.Files;
+import me.lebobus.servercore.utils.PlayerData;
 
 
 public class Main extends JavaPlugin implements Listener {
 	
 	public static Main inst;
 	 
-	//public Files config;
-	//public Files stats;
+	public Files config;
+	public Files stats;
 	
   private static Plugin plugin;
   
   public void onEnable() {
 	  
     registerEvents(this, new Listener[] { this });
-    registerEvents(this, new Listener[] { new Ban(), new Mute() });
+    registerEvents(this, new Listener[] { new Ban(), new Mute(), new PlayerData() });
     getCommand("ban").setExecutor(new Ban());
     getCommand("unban").setExecutor(new Ban());
     getCommand("kick").setExecutor(new Kick());
     getCommand("mute").setExecutor(new Mute());
     getCommand("unmute").setExecutor(new Mute());
         
-    /*
-    config = new Files(getDataFolder(), "config.yml");
+    
     stats = new Files(getDataFolder(), "stats.yml");
-    
-    
-    if(!config.fileExists()){
-    	config.createFile();
-    	config.loadFile();
-    	config.saveFile();
-    	}
-    	 
+     
     if(!stats.fileExists()){
     	stats.createFile();
     	stats.loadFile();
@@ -58,36 +52,20 @@ public class Main extends JavaPlugin implements Listener {
     	}
     
     this.stats.loadFile();
-    this.config.loadFile();
- 
-    FileConfiguration data = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "stats.yml"));
-    for (String p : data.getConfigurationSection("player").getKeys(false)) {
-    	this.stats = new Files(this.getDataFolder(), "stats.yml");
-    	this.stats.loadFile();
-    	
-    	int i = stats.getInt("player."+p+".kills");
-
-    	Killstreak.kills.put(p, i);
-    	
-    }
-    */
     
     inst = this;
     
     plugin = this;
+    
   }
   
   public void onDisable() {
-	  /*
-	  config = new Files(getDataFolder(), "config.yml");
+
 	  stats = new Files(getDataFolder(), "stats.yml");
-	  
-	  this.config.loadFile();
-	  this.config.saveFile();
 	  
 	  this.stats.loadFile();
 	  this.stats.saveFile();
-	  */
+	  
 
     plugin = null;
   }
