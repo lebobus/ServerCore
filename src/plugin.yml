@@ -1,11 +1,21 @@
 main: me.lebobus.servercore.Main
-name: ServerCore
+name: nodepvp
 version: '1.0'
-description: Vous dormez au gaz
+description: Core plugin of nodepvp.
 author: Bobus
 commands:
-    ban:
-    unban:
-    kick:
-    mute:
-    unmute:
+     ban:
+      description: Ban players.
+      usage: /ban [player]
+     unban:
+      description: Unban players.
+      usage: /unban [player]
+     kick:
+      description: Kick players.
+      usage: /kick [player]
+     mute:
+      description: Mute players.
+      usage: /mute [player]
+     unmute:
+      description: Unmute players.
+      usage: /unmute [player]

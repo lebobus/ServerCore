@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.lebobus.servercore.moderation.logs.Logs;
 import me.lebobus.servercore.utils.Prefix;
 
 public class Kick implements CommandExecutor {
@@ -20,6 +21,7 @@ public class Kick implements CommandExecutor {
 			}
 			
             if (args.length == 0 || args.length > 1) {
+            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&7Invalid arguments."));
             	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&7Usage: &b/kick &7[&bplayer&7]"));
                     return true;
             }
@@ -30,10 +32,12 @@ public class Kick implements CommandExecutor {
             	
             	if (target == null) {
             		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&b"+args[0]+"&7 is not &bonline&7."));
+            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&7Usage: &b/kick &7[&bplayer&7]"));
             		return true;
             	}
             	
             	if (target.isOnline()) {
+            		Logs.createLog((Player)sender, target, "kick", "N/A", null);
             		((Player) target).kickPlayer(ChatColor.translateAlternateColorCodes('&', "&7You have been &bkicked&7."));
             		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', Prefix.prefix+"&b"+sender.getName()+" &7has kicked&b "+target.getName()+"&7."));
             		return true;
