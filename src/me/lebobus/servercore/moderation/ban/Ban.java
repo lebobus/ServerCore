@@ -35,7 +35,14 @@ public class Ban implements CommandExecutor, Listener {
         	Player p = event.getPlayer();
         	BanList name = Bukkit.getBanList(Type.NAME);
         	BanEntry ban = name.getBanEntry(p.getName());
-            event.setKickMessage(ChatColor.translateAlternateColorCodes('&', "&8&m-+---------------------------------------+-\n\n&7You have been &bbanned&7 by &b"+ban.getSource()+"&7.\n&7Expires: &b"+ban.getExpiration()+"\n&7Reason: &b"+ban.getReason()+"&7.\n&7Appeal on &bdiscord&7.\n\n&8&m-+---------------------------------------+-"));
+        	if (ban.getExpiration() == null) {
+        		event.setKickMessage(ChatColor.translateAlternateColorCodes('&', "&8&m-+---------------------------------------+-\n\n&7You have been &bbanned&7 by &b"+ban.getSource()+"&7.\n&7Reason: &b"+ban.getReason()+"&7.\n&7Appeal on &bdiscord&7.\n\n&8&m-+---------------------------------------+-"));
+        	    return;
+        	}
+        	if (ban.getExpiration() != null) {
+                event.setKickMessage(ChatColor.translateAlternateColorCodes('&', "&8&m-+---------------------------------------+-\n\n&7You have been &bbanned&7 by &b"+ban.getSource()+"&7.\n&7Expires: &b"+ban.getExpiration()+"\n&7Reason: &b"+ban.getReason()+"&7.\n&7Appeal on &bdiscord&7.\n\n&8&m-+---------------------------------------+-"));
+        	    return;
+        	}        
         }
     }
 	
