@@ -19,3 +19,4 @@ commands:
      unmute:
       description: Unmute players.
       usage: /unmute [player]
+     test:

@@ -10,15 +10,20 @@ import me.lebobus.servercore.utils.Files;
 
 public class Logs {
 	
-	public static Files logs;
+	private Files logs;
+    public Main plugin;
 	
-	public static Random rand = new Random();
+	public Logs(Main main){
+        this.plugin = main;
+    }
+	
+	private Random rand = new Random();
 	 
-	private static int getRandomID(int min, int max) {
+	private int getRandomID(int min, int max) {
 	    return rand.nextInt(max - min) + min;
 	}
 	
-	public static void createLog(Player staff, OfflinePlayer victim, String type, String duration, String reason) {
+	public void createLog(Player staff, OfflinePlayer victim, String type, String duration, String reason) {
 	    Date now = new Date();
 	    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		
@@ -26,7 +31,7 @@ public class Logs {
 	    
 	    int ID = getRandomID(1000000, 2000000);
 	    
-		logs = new Files(Main.inst.getDataFolder(), "logs.yml");
+	    logs = new Files(Main.inst.getDataFolder(), "logs.yml");
 		logs.loadFile();
 		
 		logs.set("ID-"+ID+"."+staff.getUniqueId()+".staff", staff.getName());
@@ -35,7 +40,7 @@ public class Logs {
 		logs.set("ID-"+ID+"."+staff.getUniqueId()+".duration", duration);
 		logs.set("ID-"+ID+"."+staff.getUniqueId()+".reason", reason);
 		logs.set("ID-"+ID+"."+staff.getUniqueId()+".date", date);
-	    logs.saveFile();
+		logs.saveFile();
 	}
 
 }

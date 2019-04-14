@@ -10,7 +10,7 @@ import me.lebobus.servercore.Main;
 
 public class PlayerData implements Listener {
 
-	public Files data;
+	private Files data;
 	
 	@EventHandler
 	public void onJoin(PlayerLoginEvent e) {

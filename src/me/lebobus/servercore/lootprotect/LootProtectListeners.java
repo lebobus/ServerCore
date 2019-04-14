@@ -25,8 +25,9 @@ import net.md_5.bungee.api.ChatColor;
 
 public class LootProtectListeners implements Listener {
 	
-	protected boolean usesDamage = false;
-	protected HashMap<UUID, Damagers> damagers = new HashMap<UUID, Damagers>();
+	private boolean usesDamage = false;
+	
+	private HashMap<UUID, Damagers> damagers = new HashMap<UUID, Damagers>();
 	  
 	  
 	@EventHandler
@@ -71,7 +72,7 @@ public class LootProtectListeners implements Listener {
 	             if (entity.hasMetadata("LootSteal")) {
 	                 entity.removeMetadata("LootSteal", Main.inst);
 	             }
-	        entity.setMetadata("LootSteal", new FixedMetadataValue(Main.inst, killer.getUniqueId().toString() + " " + System.currentTimeMillis()));
+	             entity.setMetadata("LootSteal", new FixedMetadataValue(Main.inst, killer.getUniqueId().toString() + " " + System.currentTimeMillis()));
 	           }
 	        
 	        new BukkitRunnable() {
