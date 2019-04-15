@@ -13,8 +13,8 @@ import net.md_5.bungee.api.ChatColor;
 public class Assign {
 	
 	private Files bounty;
-	private FactionsUUID faction;
-	private Prefix prefix;
+	protected FactionsUUID faction;
+	protected Prefix prefix;
 	public Main plugin;
 	
 	public Assign(Main main){
@@ -45,7 +45,7 @@ public class Assign {
 			return;
 		}
 		
-		if (this.faction.isSameFaction(p, randomPlayer) == true) {
+		if (this.faction.isSameFaction(p, randomPlayer)) {
 			p.sendMessage(p.getName() + randomPlayer.getName()+"same faction, reassigning...");
 			assignTarget(p);
 			return;
