@@ -52,7 +52,7 @@ public class Assign {
 		}
 		
 		setBounty(p, randomPlayer);
-		p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7You haveeeeeeeeeeeeee been assigned:&b "+ randomPlayer.getName()+"&7."));
+		p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7You haveeeeeeeeeeeeeeee been assigned:&b "+ randomPlayer.getName()+"&7."));
 		
 	}
 
