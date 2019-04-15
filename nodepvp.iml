@@ -17,33 +17,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="spigot-api-1.8.8-R0.1-SNAPSHOT.jar">
-        <CLASSES>
-          <root url="file://$USER_HOME$/Desktop/Spigot/Spigot-API/target/spigot-api-1.8.8-R0.1-SNAPSHOT.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="spigot-api-1.8.8-R0.1-SNAPSHOT-shaded.jar">
-        <CLASSES>
-          <root url="file://$USER_HOME$/Desktop/Spigot/Spigot-API/target/spigot-api-1.8.8-R0.1-SNAPSHOT-shaded.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Factions.jar">
-        <CLASSES>
-          <root url="file://$USER_HOME$/Desktop/YANIS/KitPvP/plugins/Factions.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../spigot-1.8.8-R0.1-SNAPSHOT-latest.jar!/" />
@@ -52,6 +25,15 @@
         <SOURCES>
           <root url="jar://$MODULE_DIR$/../spigot-1.8.8-R0.1-SNAPSHOT-latest.jar!/" />
         </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../Factions.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
