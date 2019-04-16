@@ -9,18 +9,14 @@ import me.lebobus.servercore.utils.FactionsUUID;
 import me.lebobus.servercore.utils.Files;
 import me.lebobus.servercore.utils.Prefix;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.event.Listener;
 
-public class Assign {
+public class Assign implements Listener {
 	
 	private Files bounty;
-	protected FactionsUUID faction;
-	protected Prefix prefix;
-	public Main plugin;
-	
-	public Assign(Main main){
-        this.plugin = main;
-    }
-	
+	private FactionsUUID faction = new FactionsUUID();
+	private Prefix prefix = new Prefix();
+
 	private Player getRandomPlayer() {
 		int random = new Random().nextInt(Bukkit.getServer().getOnlinePlayers().size());
 		return (Player) Bukkit.getServer().getOnlinePlayers().toArray()[random];
@@ -30,29 +26,35 @@ public class Assign {
 		bounty = new Files(Main.inst.getDataFolder(), "bounty.yml");
 		bounty.loadFile();
 		
-		bounty.set(hunter.getUniqueId()+".name", hunter.getName());
-		bounty.set(hunter.getUniqueId()+".target", target.getName());
+		bounty.set("bounties."+hunter.getUniqueId()+".name", hunter.getName());
+		bounty.set("bounties."+hunter.getUniqueId()+".target", target.getName());
+		bounty.saveFile();
+	}
+
+	void resetBounties() {
+		bounty = new Files(Main.inst.getDataFolder(), "bounty.yml");
+		bounty.loadFile();
+
+		bounty.set("bounties", null);
 		bounty.saveFile();
 	}
 	
-	protected void assignTarget(Player p) {
+	void assignTarget(Player p) {
 		
 		final Player randomPlayer = getRandomPlayer();
-		
-		if (randomPlayer.getName().equals(p.getName())) {
-			p.sendMessage(randomPlayer.getName());
+
+		if (randomPlayer.getName().equals(p.getName()) || faction.isSameFaction(p, randomPlayer) || randomPlayer.getName().equals("LegendMaxqc") || randomPlayer.getName().equals("Boblus") || randomPlayer.getName().equals("flicksha")) {
 			assignTarget(p);
 			return;
 		}
-		
-		if (this.faction.isSameFaction(p, randomPlayer)) {
-			p.sendMessage(p.getName() + randomPlayer.getName()+"same faction, reassigning...");
+		/*
+		if (faction.isSameFaction(p, randomPlayer)) {
 			assignTarget(p);
 			return;
 		}
-		
+		*/
 		setBounty(p, randomPlayer);
-		p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7You haveeeeeeeeeeeeeeee been assigned:&b "+ randomPlayer.getName()+"&7."));
+		p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You have been assigned:&b "+ randomPlayer.getName()+"&7."));
 		
 	}
 

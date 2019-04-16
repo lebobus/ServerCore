@@ -11,11 +11,6 @@ import me.lebobus.servercore.utils.Files;
 public class Logs {
 	
 	private Files logs;
-    public Main plugin;
-	
-	public Logs(Main main){
-        this.plugin = main;
-    }
 	
 	private Random rand = new Random();
 	 

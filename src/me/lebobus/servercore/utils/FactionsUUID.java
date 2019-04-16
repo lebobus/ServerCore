@@ -9,12 +9,6 @@ import com.massivecraft.factions.FPlayers;
 import me.lebobus.servercore.Main;
 
 public class FactionsUUID {
-
-	public Main plugin;
-	
-	public FactionsUUID(Main main){
-        this.plugin = main;
-    }
 	
 	protected boolean hasFaction(Player p) {
 		FPlayer fPlayer = FPlayers.getInstance().getByPlayer(p);
@@ -22,8 +16,8 @@ public class FactionsUUID {
 	}
 	
 	public boolean isSameFaction(Player p, Player p2) {
-		FPlayer fPlayer = FPlayers.getInstance().getByPlayer((Player)p);
-		FPlayer fPlayer2 = FPlayers.getInstance().getByPlayer((Player)p2);
+		FPlayer fPlayer = FPlayers.getInstance().getByPlayer(p);
+		FPlayer fPlayer2 = FPlayers.getInstance().getByPlayer(p2);
 		
 		Set<FPlayer> faction1 = fPlayer.getFaction().getFPlayers();
 		

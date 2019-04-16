@@ -1,5 +1,7 @@
 package me.lebobus.servercore;
 
+import me.lebobus.servercore.bountyhunter.BountyRewards;
+import me.lebobus.servercore.silkspawner.SilkSpawner;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -17,18 +19,18 @@ import me.lebobus.servercore.utils.PluginsHider;
 public class Main extends JavaPlugin implements Listener {
 	
 	public static Main inst;
-	private static Plugin plugin; 
+	private static Plugin plugin;
 	
 	private Files data;
-	private Files logs;
-	private Files bounty;
+    private Files logs;
+    private Files bounty;
 
     public void onEnable() {
 	  
         plugin = Bukkit.getPluginManager().getPlugin("Factions");  
 	
         registerEvents(this, new Listener[] { this });
-        registerEvents(this, new Listener[] { new Ban(), new Mute(), new PlayerData(), new PluginsHider(), new LootProtectListeners(), new AssigningTimer() });
+        registerEvents(this, new Listener[] { new Ban(), new Mute(), new PlayerData(), new PluginsHider(), new LootProtectListeners(), new AssigningTimer(), new BountyRewards(), new SilkSpawner()});
     
         getCommand("ban").setExecutor(new Ban());
         getCommand("unban").setExecutor(new Ban());

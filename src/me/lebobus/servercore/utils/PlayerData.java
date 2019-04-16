@@ -11,11 +11,11 @@ import me.lebobus.servercore.Main;
 public class PlayerData implements Listener {
 
 	private Files data;
-	
+
 	@EventHandler
 	public void onJoin(PlayerLoginEvent e) {
 		
-		Player p = (Player) e.getPlayer();
+		Player p = e.getPlayer();
 		
 	    data = new Files(Main.inst.getDataFolder(), "data.yml");
 		data.loadFile();
@@ -25,7 +25,7 @@ public class PlayerData implements Listener {
 			data.set("player."+p.getUniqueId()+".muted", null);
 			data.set("player."+p.getUniqueId()+".banned", null);
 			
-			data.set("player."+p.getUniqueId()+".name", p.getName().toString());
+			data.set("player."+p.getUniqueId()+".name", p.getName());
 			data.set("player."+p.getUniqueId()+".muted", false);
 			data.set("player."+p.getUniqueId()+".banned", true);
 			data.saveFile();
@@ -33,7 +33,7 @@ public class PlayerData implements Listener {
         }
 		
 		if(data.getString("player."+p.getUniqueId().toString()) == null) {
-	       data.set("player."+p.getUniqueId()+".name", p.getName().toString());
+	       data.set("player."+p.getUniqueId()+".name", p.getName());
 	       data.set("player."+p.getUniqueId()+".muted", false);
 	       data.set("player."+p.getUniqueId()+".banned", false);
 	       data.saveFile();

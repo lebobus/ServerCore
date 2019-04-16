@@ -1,5 +1,6 @@
 package me.lebobus.servercore.moderation.ban;
 
+import me.lebobus.servercore.utils.Prefix;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -23,15 +24,17 @@ import me.lebobus.servercore.Main;
 import me.lebobus.servercore.moderation.logs.Logs;
 import me.lebobus.servercore.utils.Files;
 import me.lebobus.servercore.utils.IntegerCheck;
-import me.lebobus.servercore.utils.Prefix;
+
 
 public class Ban implements CommandExecutor, Listener {
 
 	private Files data;
-	private Logs logs;
-	private IntegerCheck intCheck;
-	private Prefix prefix;
-	
+
+	private Logs logs = new Logs();
+	private IntegerCheck intCheck = new IntegerCheck();
+	private Prefix prefix = new Prefix();
+
+
     @EventHandler (priority = EventPriority.HIGHEST)
     public void onPlayerLogin(PlayerLoginEvent event){
         if (event.getResult() == Result.KICK_BANNED) {
@@ -58,29 +61,29 @@ public class Ban implements CommandExecutor, Listener {
 		
 		if (cmd.getName().equalsIgnoreCase("ban")) {
 			if (!sender.hasPermission("core.ban")) {
-				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7You do not have access to that command."));
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You do not have access to that command."));
 				return true;
 			}
 			
             if (args.length == 0 || args.length < 3) {
-            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7Invalid arguments."));
-            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7Usage: &b/ban &7[&bplayer&7] [&bduration in days&7] [&breason&7]"));
-            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7Example: &b/ban Fortnite 1 Hacking &8(&7-1 for PERMABAN&8)&7."));
+            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7Invalid arguments."));
+            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7Usage: &b/ban &7[&bplayer&7] [&bduration in days&7] [&breason&7]"));
+            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7Example: &b/ban Fortnite 1 Hacking &8(&7-1 for PERMABAN&8)&7."));
                 return true;
             }
             
             OfflinePlayer target = Bukkit.getServer().getOfflinePlayer(args[0]);
             if (args.length >= 3) {
             
-            	if (data.getBoolean("player."+target.getUniqueId().toString()+".banned") == true) {
-            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&b"+target.getName()+"&7 is already &bbanned&7."));
+            	if (data.getBoolean("player."+target.getUniqueId().toString()+".banned")) {
+            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+target.getName()+"&7 is already &bbanned&7."));
             		return true;
             	}
 
-            	if (!this.intCheck.isInt(args[1])) {
-            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7Invalid arguments."));
-            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7Usage: &b/ban &7[&bplayer&7] [&cduration in days&7] [&breason&7]"));
-            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7Example: &b/ban Fortnite 1 Hacking &8(&7-1 for PERMABAN&8)&7."));
+            	if (!intCheck.isInt(args[1])) {
+            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7Invalid arguments."));
+            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7Usage: &b/ban &7[&bplayer&7] [&cduration in days&7] [&breason&7]"));
+            		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7Example: &b/ban Fortnite 1 Hacking &8(&7-1 for PERMABAN&8)&7."));
             		return true;
             	}
             	
@@ -94,9 +97,9 @@ public class Ban implements CommandExecutor, Listener {
             		
             		data.set("player."+target.getUniqueId()+".banned", true);
                     data.saveFile();
-                    this.logs.createLog((Player)sender, target, "PERMABAN", "N/A", s);
+                    logs.createLog((Player)sender, target, "PERMABAN", "N/A", s);
                     Bukkit.getBanList(BanList.Type.NAME).addBan(target.getName(), s, null, sender.getName());
-                    Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&b"+sender.getName()+" &7has banned&b "+target.getName()+" &7for&b"+s+"&7."));
+                    Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+sender.getName()+" &7has banned&b "+target.getName()+" &7for&b"+s+"&7."));
                     if (target.isOnline()) {
                 		((Player) target).kickPlayer(ChatColor.translateAlternateColorCodes('&', "&8&m-+---------------------------------------+-\n\n&7You have been &bbanned&7 by &b"+sender.getName()+"&7.\n&7Reason: &b"+s+"&7.\n&7Appeal on &bdiscord&7.\n\n&8&m-+---------------------------------------+-"));
                 	}
@@ -116,9 +119,9 @@ public class Ban implements CommandExecutor, Listener {
 
             data.set("player."+target.getUniqueId()+".banned", true);
             data.saveFile();
-            this.logs.createLog((Player)sender, target, "TEMPBAN", args[1]+" day(s).", s);
+            logs.createLog((Player)sender, target, "TEMPBAN", args[1]+" day(s).", s);
             Bukkit.getBanList(BanList.Type.NAME).addBan(target.getName(), s, new Date(System.currentTimeMillis()+arg1duration+(24*60*60*1000)), sender.getName());
-            Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&b"+sender.getName()+" &7has banned&b "+target.getName()+" &7for&b"+s+"&7 for&b "+args[1]+" &7day(s)&7."));
+            Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+sender.getName()+" &7has banned&b "+target.getName()+" &7for&b"+s+"&7 for&b "+args[1]+" &7day(s)&7."));
             }
             return true;
 		}
@@ -126,25 +129,25 @@ public class Ban implements CommandExecutor, Listener {
 		
 		if (cmd.getName().equalsIgnoreCase("unban")) {
 			if (!sender.hasPermission("core.unban")) {
-				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7You do not have access to that command."));
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You do not have access to that command."));
 				return true;
 			}
 			
 			if (args.length == 0 || args.length > 1) {
-				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7Invalid arguments."));
-            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&7Usage: &b/unban &7[&bplayer&7]"));
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7Invalid arguments."));
+            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7Usage: &b/unban &7[&bplayer&7]"));
                     return true;
             }
             
             OfflinePlayer target = Bukkit.getServer().getOfflinePlayer(args[0]);
-            if (data.getBoolean("player."+target.getUniqueId().toString()+".banned") == true) {
+            if (data.getBoolean("player."+target.getUniqueId().toString()+".banned")) {
             	Bukkit.getBanList(BanList.Type.NAME).pardon(target.getName());
-            	Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&b"+sender.getName()+" &7has unbanned&b "+target.getName()+"&7."));
+            	Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+sender.getName()+" &7has unbanned&b "+target.getName()+"&7."));
             	data.set("player."+target.getUniqueId()+".banned", false);
             	data.saveFile();
-            	this.logs.createLog((Player)sender, target, "UNBAN", "N/A", null);
+            	logs.createLog((Player)sender, target, "UNBAN", "N/A", null);
             } else {
-            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', this.prefix+"&b"+target.getName()+"&7 is not &bbanned&7."));
+            	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+target.getName()+"&7 is not &bbanned&7."));
             	return true;
 		    }
 	    }
