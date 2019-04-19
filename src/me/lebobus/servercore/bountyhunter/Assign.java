@@ -43,16 +43,11 @@ public class Assign implements Listener {
 		
 		final Player randomPlayer = getRandomPlayer();
 
-		if (randomPlayer.getName().equals(p.getName()) || faction.isSameFaction(p, randomPlayer) || randomPlayer.getName().equals("LegendMaxqc") || randomPlayer.getName().equals("Boblus") || randomPlayer.getName().equals("flicksha")) {
+		if (randomPlayer.getName().equals(p.getName()) || faction.isFriendly(p, randomPlayer) || randomPlayer.getName().equals("LegendMaxqc") || randomPlayer.getName().equals("Boblus") || randomPlayer.getName().equals("flicksha")) {
 			assignTarget(p);
 			return;
 		}
-		/*
-		if (faction.isSameFaction(p, randomPlayer)) {
-			assignTarget(p);
-			return;
-		}
-		*/
+
 		setBounty(p, randomPlayer);
 		p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You have been assigned:&b "+ randomPlayer.getName()+"&7."));
 		
