@@ -19,4 +19,6 @@ commands:
      unmute:
       description: Unmute players.
       usage: /unmute [player]
-     test:
+     nodepvpcore55x2:
+      description: Open 55x2 GUI.
+      usage: /nodepvpcore55x2

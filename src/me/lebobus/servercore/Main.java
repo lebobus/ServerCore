@@ -1,10 +1,18 @@
 package me.lebobus.servercore;
 
+import me.lebobus.servercore.boss.BossClaim;
+import me.lebobus.servercore.boss.Bosses;
 import me.lebobus.servercore.bountyhunter.BountyRewards;
+import me.lebobus.servercore.customenchants.Speed;
+import me.lebobus.servercore.lottery.LotteryCommand;
+import me.lebobus.servercore.lottery.LotteryGUI;
 import me.lebobus.servercore.silkspawner.SilkSpawner;
+import me.lebobus.servercore.utils.VaultHook;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.lebobus.servercore.bountyhunter.AssigningTimer;
@@ -25,18 +33,37 @@ public class Main extends JavaPlugin implements Listener {
     private Files logs;
     private Files bounty;
 
+    public static Economy econ = null;
+
+    private VaultHook vaultHook = new VaultHook();
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+
     public void onEnable() {
 	  
-        plugin = Bukkit.getPluginManager().getPlugin("Factions");  
-	
+        plugin = Bukkit.getPluginManager().getPlugin("Factions");
+        plugin = Bukkit.getPluginManager().getPlugin("Vault");
+        plugin = Bukkit.getPluginManager().getPlugin("ArmorEventPlugin");
+
         registerEvents(this, new Listener[] { this });
-        registerEvents(this, new Listener[] { new Ban(), new Mute(), new PlayerData(), new PluginsHider(), new LootProtectListeners(), new AssigningTimer(), new BountyRewards(), new SilkSpawner()});
-    
+        registerEvents(this, new Listener[] { new Ban(), new Mute(), new PlayerData(), new PluginsHider(), new LootProtectListeners(), new AssigningTimer(), new BountyRewards(), new SilkSpawner(), new BossClaim(), new Bosses(), new LotteryGUI(), new Speed() });
+
         getCommand("ban").setExecutor(new Ban());
         getCommand("unban").setExecutor(new Ban());
         getCommand("kick").setExecutor(new Kick());
         getCommand("mute").setExecutor(new Mute());
         getCommand("unmute").setExecutor(new Mute());
+        getCommand("nodepvpcore55x2").setExecutor(new LotteryCommand());
 
         data = new Files(getDataFolder(), "data.yml");
         logs = new Files(getDataFolder(), "logs.yml");
@@ -59,7 +86,15 @@ public class Main extends JavaPlugin implements Listener {
              bounty.loadFile();
              bounty.saveFile();
         }
-    
+
+        if (!this.setupEconomy()) {
+            this.getLogger().severe("Disabled due to no VaultHook dependency found!");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
+        vaultHook.setupPermissions();
+        vaultHook.setupChat();
+
         this.data.loadFile();
         this.logs.loadFile();
         this.bounty.loadFile();

@@ -12,9 +12,9 @@ public class Logs {
 	
 	private Files logs;
 	
-	private Random rand = new Random();
+	public Random rand = new Random();
 	 
-	private int getRandomID(int min, int max) {
+	public int getRandomID(int min, int max) {
 	    return rand.nextInt(max - min) + min;
 	}
 	

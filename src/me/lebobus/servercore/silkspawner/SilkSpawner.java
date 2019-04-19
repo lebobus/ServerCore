@@ -2,11 +2,9 @@ package me.lebobus.servercore.silkspawner;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class SilkSpawner implements Listener {
 
-    public boolean hasSilkTouch(ItemStack tool) {
+    private boolean hasSilkTouch(ItemStack tool) {
 
         if (tool == null) {
             return false;
@@ -44,7 +42,7 @@ public class SilkSpawner implements Listener {
                 ItemStack tool = player.getItemInHand();
                 boolean silkTouch = hasSilkTouch(tool);
 
-                if (silkTouch && e.getBlock().getType() == Material.MOB_SPAWNER) {
+                if (silkTouch) {
                     CreatureSpawner cs = (CreatureSpawner) e.getBlock().getState();
                     if (cs.getSpawnedType().equals(EntityType.ZOMBIE)) {
                         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "stacker give "+e.getPlayer().getName()+" spawner zombie 1");
