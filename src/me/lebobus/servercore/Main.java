@@ -3,10 +3,11 @@ package me.lebobus.servercore;
 import me.lebobus.servercore.boss.BossClaim;
 import me.lebobus.servercore.boss.Bosses;
 import me.lebobus.servercore.bountyhunter.BountyRewards;
-import me.lebobus.servercore.customenchants.Speed;
+import me.lebobus.servercore.customenchants.*;
 import me.lebobus.servercore.lottery.LotteryCommand;
 import me.lebobus.servercore.lottery.LotteryGUI;
 import me.lebobus.servercore.silkspawner.SilkSpawner;
+import me.lebobus.servercore.tags.Clutch;
 import me.lebobus.servercore.utils.VaultHook;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -56,7 +57,7 @@ public class Main extends JavaPlugin implements Listener {
         plugin = Bukkit.getPluginManager().getPlugin("ArmorEventPlugin");
 
         registerEvents(this, new Listener[] { this });
-        registerEvents(this, new Listener[] { new Ban(), new Mute(), new PlayerData(), new PluginsHider(), new LootProtectListeners(), new AssigningTimer(), new BountyRewards(), new SilkSpawner(), new BossClaim(), new Bosses(), new LotteryGUI(), new Speed() });
+        registerEvents(this, new Listener[] { new Ban(), new Mute(), new PlayerData(), new PluginsHider(), new LootProtectListeners(), new AssigningTimer(), new BountyRewards(), new SilkSpawner(), new BossClaim(), new Bosses(), new LotteryGUI(), new Speed(), new Clutch(), new HealthBoost(), new Resistance(), new FireResistance(), new Bonus()});
 
         getCommand("ban").setExecutor(new Ban());
         getCommand("unban").setExecutor(new Ban());

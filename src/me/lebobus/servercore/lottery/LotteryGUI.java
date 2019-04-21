@@ -103,8 +103,6 @@ public class LotteryGUI implements Listener {
 
         ItemStack t = e.getCurrentItem();
 
-
-
         if (!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
         if (t == null || t.getType() == Material.AIR) return;
         if (t.getItemMeta() == null) return;
