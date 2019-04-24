@@ -17,10 +17,9 @@ public class HealthBoost implements Listener {
     @EventHandler
     public void onUnequip(PlayerArmorUnequipEvent e) {
         ItemStack i = e.getItemStack();
-        if (i == null) return;
 
         if (i.getType() == Material.DIAMOND_CHESTPLATE) {
-            if (i.getItemMeta().getLore().contains(ChatColor.GRAY+"Health Boost I")) {
+            if (i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Health Boost I")) {
                 e.getPlayer().removePotionEffect(PotionEffectType.HEALTH_BOOST);
             }
         }
@@ -29,11 +28,10 @@ public class HealthBoost implements Listener {
     @EventHandler
     public void onEquip(PlayerArmorEquipEvent e) {
         ItemStack i = e.getItemStack();
-        if (i == null) return;
 
         if (e.getPlayer().hasPotionEffect(PotionEffectType.HEALTH_BOOST)) return;
         if (i.getType() == Material.DIAMOND_CHESTPLATE) {
-            if (i.getItemMeta().getLore().contains(ChatColor.GRAY+"Health Boost I")) {
+            if (i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Health Boost I")) {
                 e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 0));
             }
         }

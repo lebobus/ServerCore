@@ -117,6 +117,7 @@ public class LotteryGUI implements Listener {
                     Main.econ.depositPlayer(p, 125000);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You rolled &b55 &7and won &b$125&7,&b000&7."));
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+p.getName()+" &7rolled &b55 &7and won &b$125&7,&b000&7."));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+p.getName()+" deluxetags.tag.55x2");
                     return;
                 }
 
@@ -150,6 +151,7 @@ public class LotteryGUI implements Listener {
                     Main.econ.depositPlayer(p, 250000);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You rolled &b55 &7and won &b$250&7,&b000&7."));
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+p.getName()+" &7rolled &b55 &7and won &b$250&7,&b000&7."));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+p.getName()+" deluxetags.tag.55x2");
                     return;
                 }
 
@@ -183,6 +185,7 @@ public class LotteryGUI implements Listener {
                     Main.econ.depositPlayer(p, 500000);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You rolled &b55 &7and won &b$250&7,&b000&7."));
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+p.getName()+" &7rolled &b55 &7and won &b$250&7,&b000&7."));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+p.getName()+" deluxetags.tag.55x2");
                     return;
                 }
 
@@ -216,6 +219,7 @@ public class LotteryGUI implements Listener {
                     Main.econ.depositPlayer(p, 1250000);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You rolled &b55 &7and won &b$1&7,&b250&7,&b000&7."));
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+p.getName()+" &7rolled &b55 &7and won &b$1&7,&b250&7,&b000&7."));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+p.getName()+" deluxetags.tag.55x2");
                     return;
                 }
 
@@ -249,6 +253,7 @@ public class LotteryGUI implements Listener {
                     Main.econ.depositPlayer(p, 2500000);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You rolled &b55 &7and won &b$2&7,&b500&7,&b000&7."));
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+p.getName()+" &7rolled &b55 &7and won &b$2&7,&b500&7,&b000&7."));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+p.getName()+" deluxetags.tag.55x2");
                     return;
                 }
 
@@ -282,6 +287,7 @@ public class LotteryGUI implements Listener {
                     Main.econ.depositPlayer(p, 5000000);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You rolled &b55 &7and won &b$5&7,&b000&7,&b000&7."));
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+p.getName()+" &7rolled &b55 &7and won &b$5&7,&b000&7,&b000&7."));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+p.getName()+" deluxetags.tag.55x2");
                     return;
                 }
 
@@ -315,6 +321,7 @@ public class LotteryGUI implements Listener {
                     Main.econ.depositPlayer(p, 12500000);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You rolled &b55 &7and won &b$12&7,&b500&7,&b000&7."));
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+p.getName()+" &7rolled &b55 &7and won &b$12&7,&b500&7,&b000&7."));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+p.getName()+" deluxetags.tag.55x2");
                     return;
                 }
 
@@ -348,6 +355,7 @@ public class LotteryGUI implements Listener {
                     Main.econ.depositPlayer(p, 15000000);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You rolled &b55 &7and won &b$15&7,&b000&7,&b000&7."));
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+p.getName()+" &7rolled &b55 &7and won &b$15&7,&b000&7,&b000&7."));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+p.getName()+" deluxetags.tag.55x2");
                     return;
                 }
 
@@ -381,6 +389,7 @@ public class LotteryGUI implements Listener {
                     Main.econ.depositPlayer(p, 50000000);
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&7You rolled &b55 &7and won &b$50&7,&b000&7,&b000&7."));
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix.prefix+"&b"+p.getName()+" &7rolled &b55 &7and won &b$50&7,&b000&7,&b000&7."));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+p.getName()+" deluxetags.tag.55x2");
                     return;
                 }
 

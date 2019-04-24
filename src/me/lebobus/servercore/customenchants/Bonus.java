@@ -18,21 +18,24 @@ public class Bonus implements Listener {
         ItemStack l = p.getInventory().getLeggings();
         ItemStack b = p.getInventory().getBoots();
 
+        String missing = "null";
+
         if (h == null && c != null && l != null && b != null) {
-            return "helmet";
+            missing = "helmet";
         }
         if (h != null && c == null && l != null && b != null) {
-            return "chestplate";
+            missing = "chestplate";
         }
         if (h != null && c != null && l == null && b != null) {
-            return "leggings";
+            missing = "leggings";
         }
         if (h != null && c != null && l != null && b == null) {
-            return "boots";
+            missing = "boots";
         }
 
-        return "";
+        return missing;
     }
+
 
     private boolean fullArmor(Player p) {
         ItemStack h = p.getInventory().getHelmet();
@@ -40,17 +43,14 @@ public class Bonus implements Listener {
         ItemStack l = p.getInventory().getLeggings();
         ItemStack b = p.getInventory().getBoots();
 
-        if (h == null && c == null && l == null && b == null) return false;
-        if (h != null && c != null && l != null && b != null) return true;
-        return false;
+        return (h != null && c != null && l != null && b != null);
     }
 
     @EventHandler
     public void onUnequip(PlayerArmorUnequipEvent e) {
         ItemStack i = e.getItemStack();
-        if (i == null) return;
 
-        if (missingPiece(e.getPlayer()).equals("helmet") && missingPiece(e.getPlayer()).equals("") && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Fire Resistance I")) {
+        if (missingPiece(e.getPlayer()).equals("helmet") && i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Fire Resistance I")) {
             if (e.getPlayer().getInventory().getChestplate().getItemMeta().getLore().contains(ChatColor.GRAY + "Health Boost I")) {
                 if (e.getPlayer().getInventory().getLeggings().getItemMeta().getLore().contains(ChatColor.GRAY + "Resistance I")) {
                     if (e.getPlayer().getInventory().getBoots().getItemMeta().getLore().contains(ChatColor.GRAY + "Speed I")) {
@@ -60,7 +60,7 @@ public class Bonus implements Listener {
             }
         }
 
-        if (missingPiece(e.getPlayer()).equals("chestplate") && missingPiece(e.getPlayer()).equals("") && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Health Boost I")) {
+        if (missingPiece(e.getPlayer()).equals("chestplate") && i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Health Boost I")) {
             if (e.getPlayer().getInventory().getHelmet().getItemMeta().getLore().contains(ChatColor.GRAY + "Fire Resistance I")) {
                 if (e.getPlayer().getInventory().getLeggings().getItemMeta().getLore().contains(ChatColor.GRAY + "Resistance I")) {
                     if (e.getPlayer().getInventory().getBoots().getItemMeta().getLore().contains(ChatColor.GRAY + "Speed I")) {
@@ -70,7 +70,7 @@ public class Bonus implements Listener {
             }
         }
 
-        if (missingPiece(e.getPlayer()).equals("leggings") && missingPiece(e.getPlayer()).equals("") && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Resistance I")) {
+        if (missingPiece(e.getPlayer()).equals("leggings") && i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Resistance I")) {
             if (e.getPlayer().getInventory().getHelmet().getItemMeta().getLore().contains(ChatColor.GRAY + "Fire Resistance I")) {
                 if (e.getPlayer().getInventory().getChestplate().getItemMeta().getLore().contains(ChatColor.GRAY + "Health Boost I")) {
                     if (e.getPlayer().getInventory().getBoots().getItemMeta().getLore().contains(ChatColor.GRAY + "Speed I")) {
@@ -80,7 +80,7 @@ public class Bonus implements Listener {
             }
         }
 
-        if (missingPiece(e.getPlayer()).equals("boots") && missingPiece(e.getPlayer()).equals("") && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Speed I")) {
+        if (missingPiece(e.getPlayer()).equals("boots") && i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Speed I")) {
             if (e.getPlayer().getInventory().getHelmet().getItemMeta().getLore().contains(ChatColor.GRAY + "Fire Resistance I")) {
                 if (e.getPlayer().getInventory().getChestplate().getItemMeta().getLore().contains(ChatColor.GRAY + "Health Boost I")) {
                     if (e.getPlayer().getInventory().getLeggings().getItemMeta().getLore().contains(ChatColor.GRAY + "Resistance I")) {
@@ -99,10 +99,10 @@ public class Bonus implements Listener {
         if (i == null) return;
 
         if (e.getPlayer().getInventory().getHelmet() != null && e.getPlayer().getInventory().getChestplate() != null && e.getPlayer().getInventory().getLeggings() != null && e.getPlayer().getInventory().getBoots() != null) {
-            if (e.getPlayer().getInventory().getHelmet().getItemMeta().getLore().contains(ChatColor.GRAY+"Fire Resistance I")) {
-                if (e.getPlayer().getInventory().getChestplate().getItemMeta().getLore().contains(ChatColor.GRAY+"Health Boost I")) {
-                    if (e.getPlayer().getInventory().getLeggings().getItemMeta().getLore().contains(ChatColor.GRAY+"Resistance I")) {
-                        if (e.getPlayer().getInventory().getBoots().getItemMeta().getLore().contains(ChatColor.GRAY+"Speed I")) {
+            if (i.hasItemMeta() && e.getPlayer().getInventory().getHelmet().getItemMeta().getLore().contains(ChatColor.GRAY+"Fire Resistance I")) {
+                if (i.hasItemMeta() && e.getPlayer().getInventory().getChestplate().getItemMeta().getLore().contains(ChatColor.GRAY+"Health Boost I")) {
+                    if (i.hasItemMeta() && e.getPlayer().getInventory().getLeggings().getItemMeta().getLore().contains(ChatColor.GRAY+"Resistance I")) {
+                        if (i.hasItemMeta() && e.getPlayer().getInventory().getBoots().getItemMeta().getLore().contains(ChatColor.GRAY+"Speed I")) {
                             e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
                         }
                     }

@@ -13,6 +13,7 @@ public class Clutch implements Listener {
         if (e.getEntity() instanceof Player && e.getEntity().getKiller() instanceof Player) {
             if (e.getEntity().getKiller().getHealth() <= 1.0 && !e.getEntity().getKiller().hasPermission("deluxetags.tag.clutch")) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+e.getEntity().getKiller().getName()+" deluxetags.tag.clutch");
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuaddp "+e.getEntity().getName()+" deluxetags.tag.unlucky");
             }
         }
     }

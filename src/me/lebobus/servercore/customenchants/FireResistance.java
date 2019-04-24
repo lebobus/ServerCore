@@ -17,10 +17,8 @@ public class FireResistance implements Listener {
     @EventHandler
     public void onUnequip(PlayerArmorUnequipEvent e) {
         ItemStack i = e.getItemStack();
-        if (i == null) return;
-
         if (i.getType() == Material.DIAMOND_HELMET) {
-            if (i.getItemMeta().getLore().contains(ChatColor.GRAY+"Fire Resistance I")) {
+            if (i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Fire Resistance I")) {
                 e.getPlayer().removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
             }
         }
@@ -29,11 +27,9 @@ public class FireResistance implements Listener {
     @EventHandler
     public void onEquip(PlayerArmorEquipEvent e) {
         ItemStack i = e.getItemStack();
-        if (i == null) return;
-
         if (e.getPlayer().hasPotionEffect(PotionEffectType.FIRE_RESISTANCE)) return;
         if (i.getType() == Material.DIAMOND_HELMET) {
-            if (i.getItemMeta().getLore().contains(ChatColor.GRAY+"Fire Resistance I")) {
+            if (i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Fire Resistance I")) {
                 e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 1000000, 0));
             }
         }

@@ -15,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 public class SilkSpawner implements Listener {
 
     private boolean hasSilkTouch(ItemStack tool) {
-
         if (tool == null) {
             return false;
         }
@@ -56,10 +55,6 @@ public class SilkSpawner implements Listener {
                         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "stacker give "+e.getPlayer().getName()+" spawner spider 1");
                     }
 
-                    if (cs.getSpawnedType().equals(EntityType.CAVE_SPIDER)) {
-                        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "stacker give "+e.getPlayer().getName()+" spawner cavespider 1");
-                    }
-
                     if (cs.getSpawnedType().equals(EntityType.CREEPER)) {
                         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "stacker give "+e.getPlayer().getName()+" spawner creeper 1");
                     }
@@ -69,7 +64,11 @@ public class SilkSpawner implements Listener {
                     }
 
                     if (cs.getSpawnedType().equals(EntityType.IRON_GOLEM)) {
-                        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "stacker give "+e.getPlayer().getName()+" spawner irongolem 1");
+                        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "stacker give "+e.getPlayer().getName()+" spawner iron_golem 1");
+                    }
+
+                    if (cs.getSpawnedType().equals(EntityType.SILVERFISH)) {
+                        Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "stacker give "+e.getPlayer().getName()+" spawner silverfish 1");
                     }
 
                 }

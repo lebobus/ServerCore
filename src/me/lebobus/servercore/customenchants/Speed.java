@@ -17,10 +17,9 @@ public class Speed implements Listener {
     @EventHandler
     public void onUnequip(PlayerArmorUnequipEvent e) {
         ItemStack i = e.getItemStack();
-        if (i == null) return;
 
         if (i.getType() == Material.DIAMOND_BOOTS) {
-            if (i.getItemMeta().getLore().contains(ChatColor.GRAY+"Speed I")) {
+            if (i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Speed I")) {
                 e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
             }
         }
@@ -29,10 +28,10 @@ public class Speed implements Listener {
     @EventHandler
     public void onEquip(PlayerArmorEquipEvent e) {
         ItemStack i = e.getItemStack();
-        if (i == null) return;
+
         if (e.getPlayer().hasPotionEffect(PotionEffectType.SPEED)) return;
         if (i.getType() == Material.DIAMOND_BOOTS) {
-            if (i.getItemMeta().getLore().contains(ChatColor.GRAY+"Speed I")) {
+            if (i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Speed I")) {
                 e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
             }
         }

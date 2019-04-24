@@ -17,10 +17,9 @@ public class Resistance implements Listener {
     @EventHandler
     public void onUnequip(PlayerArmorUnequipEvent e) {
         ItemStack i = e.getItemStack();
-        if (i == null) return;
 
         if (i.getType() == Material.DIAMOND_LEGGINGS) {
-            if (i.getItemMeta().getLore().contains(ChatColor.GRAY+"Resistance I")) {
+            if (i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Resistance I")) {
                 e.getPlayer().removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
             }
         }
@@ -29,11 +28,10 @@ public class Resistance implements Listener {
     @EventHandler
     public void onEquip(PlayerArmorEquipEvent e) {
         ItemStack i = e.getItemStack();
-        if (i == null) return;
 
         if (e.getPlayer().hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) return;
         if (i.getType() == Material.DIAMOND_LEGGINGS) {
-            if (i.getItemMeta().getLore().contains(ChatColor.GRAY+"Resistance I")) {
+            if (i.hasItemMeta() && i != null && i.getItemMeta().getLore().contains(ChatColor.GRAY+"Resistance I")) {
                 e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
             }
         }
